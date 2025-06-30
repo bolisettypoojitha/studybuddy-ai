@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">📅 Study Planner</h2>
+
+  <form method="POST" class="row g-3 mb-4">
+    <div class="col-md-4">
+      <input type="date" name="date" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <input type="text" name="topic" class="form-control" placeholder="Topic or Task" required>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100">Add</button>
+    </div>
+  </form>
+
+  {% if plans %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Topic</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for plan in plans %}
+      <tr>
+        <td>{{ plan.date }}</td>
+        <td>{{ plan.topic }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted">No study plans yet. Add one above!</p>
+  {% endif %}
+</div>
+{% endblock %}

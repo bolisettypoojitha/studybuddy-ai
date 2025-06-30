@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Pomodoro Study Timer</h2>
+
+<div class="text-center">
+  <h1 id="timer" class="display-2">25:00</h1>
+  <button onclick="startTimer()" class="btn btn-success me-2">Start</button>
+  <button onclick="pauseTimer()" class="btn btn-warning me-2">Pause</button>
+  <button onclick="resetTimer()" class="btn btn-danger">Reset</button>
+</div>
+
+<script>
+let timerDisplay = document.getElementById("timer");
+let totalSeconds = 1500;  // 25 minutes
+let interval = null;
+
+function updateDisplay() {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function startTimer() {
+    if (!interval) {
+        interval = setInterval(() => {
+            if (totalSeconds > 0) {
+                totalSeconds--;
+                updateDisplay();
+            } else {
+                clearInterval(interval);
+                interval = null;
+                alert("Time's up! Take a break.");
+            }
+        }, 1000);
+    }
+}
+
+function pauseTimer() {
+    clearInterval(interval);
+    interval = null;
+}
+
+function resetTimer() {
+    clearInterval(interval);
+    interval = null;
+    totalSeconds = 1500;
+    updateDisplay();
+}
+
+updateDisplay();
+</script>
+{% endblock %}

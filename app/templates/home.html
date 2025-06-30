@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .hero {
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .hero img {
+    max-width: 400px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-buttons .btn {
+    margin: 10px;
+    min-width: 150px;
+  }
+</style>
+
+<div class="hero">
+  <img src="https://cdn-icons-png.flaticon.com/512/3534/3534067.png" alt="StudyBuddy Logo" class="mb-4" />
+  <h1 class="display-4 fw-bold">Welcome to StudyBuddy!</h1>
+  <p class="lead text-muted">Your AI-powered learning assistant to organize, learn, and succeed.</p>
+
+  <div class="hero-buttons">
+    <a href="/register" class="btn btn-primary btn-lg">Get Started</a>
+    <a href="/login" class="btn btn-outline-secondary btn-lg">Login</a>
+  </div>
+</div>
+{% endblock %}

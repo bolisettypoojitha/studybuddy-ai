@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2 class="mb-3">📝 My Notes</h2>
+
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <!-- Add Note Form -->
+  <form action="{{ url_for('notes.add_note') }}" method="POST" class="mb-4 shadow-sm p-4 rounded bg-light">
+    <div class="row">
+      <div class="col-md-4 mb-2">
+        <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+      </div>
+      <div class="col-md-4 mb-2">
+        <input type="text" name="topic" class="form-control" placeholder="Topic" required>
+      </div>
+      <div class="col-md-12 mb-2">
+        <textarea name="content" class="form-control" rows="3" placeholder="Enter note content..." required></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </form>
+
+  <!-- Notes Display -->
+  {% for note in notes %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ note.subject }} - {{ note.topic }}</h5>
+        <p class="card-text">{{ note.content }}</p>
+        
+        <a href="{{ url_for('notes.summarize_note', note_id=note.id) }}" class="btn btn-info btn-sm">Summarize</a>
+        <a href="{{ url_for('tools.generate_flashcards', note_id=note.id) }}" class="btn btn-warning btn-sm">Flashcards</a>
+        <a href="{{ url_for('quiz.generate_quiz', note_id=note.id) }}" class="btn btn-success btn-sm">Quiz</a>
+        <a href="{{ url_for('notes.delete_note', note_id=note.id) }}" class="btn btn-danger btn-sm">Delete</a>
+      </div>
+    </div>
+  {% else %}
+    <p class="text-muted">No notes added yet. Use the form above to get started!</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h3>📝 Quiz from Note: <strong>{{ note.topic }}</strong></h3>
+
+  {% if questions %}
+    <form class="mt-4">
+      {% for q in questions %}
+        <div class="card mb-3 p-3 shadow-sm">
+          <p><strong>Q{{ loop.index }}:</strong> {{ q.question }}</p>
+          <input type="text" class="form-control" placeholder="Your answer...">
+          <div class="text-muted mt-1">Answer: <em>{{ q.answer }}</em></div>
+        </div>
+      {% endfor %}
+    </form>
+  {% else %}
+    <p class="text-warning">⚠️ No questions generated. Try with a more detailed note.</p>
+  {% endif %}
+
+  <a href="/notes" class="btn btn-secondary mt-4">← Back to Notes</a>
+</div>
+{% endblock %}

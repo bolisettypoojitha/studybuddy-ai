@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Flashcards</h2>
+<div class="row">
+  {% for card in flashcards %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <p><strong>Q:</strong> {{ card.question }}</p>
+        <div class="alert alert-secondary">
+          <strong>A:</strong> {{ card.answer }}
+        </div>
+        <a href="/flashcards/delete/{{ card.id }}" class="btn btn-sm btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<a href="/notes" class="btn btn-outline-primary mt-3">← Back to Notes</a>
+{% endblock %}

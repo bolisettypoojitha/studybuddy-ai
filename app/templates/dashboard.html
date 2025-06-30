@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Welcome, {{ name }}! 👋</h2>
+
+  <!-- Progress Bar -->
+  <h4>Your Study Tasks</h4>
+  <div class="progress mb-3" style="height: 24px;">
+    <div class="progress-bar" role="progressbar" style="width: {{ progress }}%; aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+      {{ progress }}% Complete
+    </div>
+  </div>
+
+  <!-- Task List -->
+  {% if tasks %}
+    <ul class="list-group mb-4">
+      {% for task in tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ task.description }}
+          {% if task.completed %}
+            <span class="badge bg-success">Done</span>
+          {% else %}
+            <span class="badge bg-warning text-dark">Pending</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tasks added yet.</p>
+  {% endif %}
+
+  <!-- Quick Links -->
+  <div class="row mt-4">
+    <h4>Quick Links</h4>
+    <div class="col-md-3">
+      <a href="/notes" class="btn btn-outline-primary w-100 mb-2">📝 Notes</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/flashcards" class="btn btn-outline-secondary w-100 mb-2">📇 Flashcards</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/todo" class="btn btn-outline-success w-100 mb-2">✅ To-Do List</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/planner" class="btn btn-outline-info w-100 mb-2">📅 Study Planner</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/timer" class="btn btn-outline-dark w-100 mb-2">⏱️ Pomodoro Timer</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

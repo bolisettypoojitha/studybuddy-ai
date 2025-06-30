@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .error-image {
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+    animation: float 2s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+</style>
+
+<div class="text-center mt-5 fade-in">
+  <!-- Optional image (you can replace with your own path or use online image) -->
+  <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" alt="404 image" class="error-image" />
+
+  <h1 class="display-1 text-danger">404</h1>
+  <h3 class="mb-3">Page Not Found</h3>
+  <p class="text-muted">Oops! The page you're looking for doesn’t exist or has been moved.</p>
+
+  <div class="mt-4">
+    <a href="/dashboard" class="btn btn-primary me-2">Go to Dashboard</a>
+    <a href="/login" class="btn btn-outline-secondary">Login</a>
+  </div>
+</div>
+{% endblock %}

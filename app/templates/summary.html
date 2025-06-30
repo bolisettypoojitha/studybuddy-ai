@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h3>Summary for: <strong>{{ note.topic }}</strong></h3>
+
+  <div class="card p-4 shadow-sm mt-3">
+    <h5 class="text-primary">Original Note:</h5>
+    <p>{{ note.content }}</p>
+
+    <hr>
+
+    <h5 class="text-success">AI Summary:</h5>
+    <p><strong>{{ summary }}</strong></p>
+  </div>
+
+  <a href="/notes" class="btn btn-secondary mt-4">← Back to Notes</a>
+</div>
+{% endblock %}
