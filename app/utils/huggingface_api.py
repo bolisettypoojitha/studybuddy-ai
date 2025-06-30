@@ -1,11 +1,12 @@
 import requests
+import os
 
 # ✅ Your actual Hugging Face API token (hardcoded for now)
 HUGGINGFACE_API_KEY = "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"
 
-headers = {
-    "Authorization": f"Bearer {HUGGINGFACE_API_KEY}"
-}
+headers = {"Authorization": f"Bearer {os.getenv('HUGGINGFACE_API_KEY')}"}
+
+
 
 # === Summarization Function ===
 def summarize_text(text):
@@ -42,3 +43,5 @@ def generate_questions(text):
             return [{"question": "⚠️ Could not generate questions", "answer": ""}]
     except Exception as e:
         return [{"question": "❌ Unexpected Error", "answer": str(e)}]
+    
+

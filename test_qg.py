@@ -1,13 +1,19 @@
-import requests
+import os
+from app.utils import huggingface_api
+from dotenv import load_dotenv
 
-API_URL = "https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-squadv2"
-headers = {
-    "Authorization": "Bearer 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"
-}
+load_dotenv()  # Load API key from .env
 
-prompt = "context: Artificial Intelligence enables machines to learn from data. question: What does AI enable machines to do?"
+sample_text = """
+Artificial Intelligence is the simulation of human intelligence processes by machines, especially computer systems. These processes include learning, reasoning, and self-correction. AI is used in applications like natural language processing, robotics, and machine vision.
+"""
 
-response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
+print("📌 Summary:")
+print(huggingface_api.summarize_text(sample_text))
 
-print("Status Code:", response.status_code)
-print("Response Text:", response.text)
+print("\n🧠 Questions:")
+questions = huggingface_api.generate_questions(sample_text)
+for q in questions:
+    print("Q:", q.get("question"))
+    print("A:", q.get("answer"))
+    print("---")
