@@ -1,0 +1,171 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+a.btn {
+  transition: background 0.3s ease;
+}
+
+a.btn:hover {
+  opacity: 0.9;
+}
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #4a90e2;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #357ab8;
+}
+
+input.form-control, button {
+  border-radius: 12px;
+}
+
+/* 🌙 DARK MODE STYLES */
+body.dark-mode {
+  background-color: #08023d;
+  color: #f5f5f5;
+}
+
+.dark-mode .navbar,
+.dark-mode .card,
+.dark-mode .modal-content {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+.dark-mode .btn-outline-primary {
+  color: #fff;
+  border-color: #90caf9;
+}
+
+.dark-mode .btn-outline-success {
+  color: #fff;
+  border-color: #66bb6a;
+}
+
+.dark-mode .btn-outline-warning {
+  color: #fff;
+  border-color: #ffa726;
+}
+
+.dark-mode .btn-outline-dark {
+  color: #fff;
+  border-color: #fff;
+}
+
+.dark-mode a,
+.dark-mode a:hover {
+  color: #90caf9;
+}
+
+.dark-mode .form-control {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+
+
+
+/* 📱 Responsive Media Queries */
+@media (max-width: 768px) {
+  h1, h2, h3 {
+    font-size: 1.5rem;
+  }
+
+  .container,
+  .container-fluid {
+    padding: 0 15px;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .row.g-4 > .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .navbar-toggler {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+
+  .card-body p,
+  .card-body h5 {
+    font-size: 0.9rem;
+  }
+
+  .text-end {
+    text-align: center !important;
+  }
+
+  .btn-group,
+  .d-flex {
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+}

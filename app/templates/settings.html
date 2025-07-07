@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Settings | StudyBuddy{% endblock %}
+{% block content %}
+<div class="container py-5" data-aos="fade-up">
+  <h2 class="mb-4 text-center">⚙️ User Settings</h2>
+  <form method="POST" action="{{ url_for('settings.settings') }}" enctype="multipart/form-data">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>First Name</label>
+        <input type="text" name="first_name" class="form-control" value="{{ current_user.first_name or '' }}">
+      </div>
+      <div class="col-md-6">
+        <label>Last Name</label>
+        <input type="text" name="last_name" class="form-control" value="{{ current_user.last_name or '' }}">
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Username</label>
+      <input type="text" name="username" class="form-control" value="{{ current_user.username or '' }}">
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control" value="{{ current_user.email or '' }}">
+    </div>
+    <div class="mb-3">
+      <label>Bio</label>
+      <textarea name="bio" class="form-control">{{ current_user.bio or '' }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label>Gender</label>
+      <select name="gender" class="form-control">
+        <option value="">Select</option>
+        <option value="Male" {% if current_user.gender == 'Male' %}selected{% endif %}>Male</option>
+        <option value="Female" {% if current_user.gender == 'Female' %}selected{% endif %}>Female</option>
+        <option value="Other" {% if current_user.gender == 'Other' %}selected{% endif %}>Other</option>
+        <option value="Prefer not to say" {% if current_user.gender == 'Prefer not to say' %}selected{% endif %}>Prefer not to say</option>
+      </select>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>Date of Birth</label>
+        <input type="date" name="dob" class="form-control" value="{{ current_user.dob or '' }}">
+      </div>
+      <div class="col-md-6">
+        <label>Phone Number</label>
+        <input type="text" name="phone" class="form-control" value="{{ current_user.phone or '' }}">
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Location</label>
+      <input type="text" name="location" class="form-control" value="{{ current_user.location or '' }}">
+    </div>
+    <div class="mb-3">
+      <label>Upload Profile Photo</label>
+      <input type="file" name="profile_pic" class="form-control">
+    </div>
+    <hr>
+    <h5 class="mb-3">🔐 Change Password</h5>
+    <div class="mb-3">
+      <label>Current Password</label>
+      <input type="password" name="current_password" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>New Password</label>
+      <input type="password" name="new_password" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>Confirm New Password</label>
+      <input type="password" name="confirm_password" class="form-control">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success">Save Changes</button>
+    </div>
+  </form>
+  <hr class="my-5">
+  <div class="text-center">
+    <form method="POST" action="{{ url_for('settings.delete_account') }}">
+      <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}StudyBuddy{% endblock %}</title>
+
+  <!-- Styles & AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    .navbar-custom {
+      background: linear-gradient(to right, #007bff, #0056b3);
+    }
+    .navbar-custom .nav-link,
+    .navbar-custom .navbar-brand {
+      color: #fff !important;
+    }
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🌐 Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">📘 StudyBuddy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          {% if current_user.is_authenticated %}
+            <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">📚Dashboard</a>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('settings.settings') }}">⚙️Settings</a></li>
+            <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('auth.logout') }}">Logout</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-light ms-2" href="{{ url_for('auth.register') }}">Get Started</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <button class="btn btn-sm btn-dark ms-3" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 📦 Main Content -->
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container mt-3">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- 📎 Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <small>Made with ❤️ for learners | StudyBuddy © 2025</small>
+  </footer>
+
+  <!-- 🔝 Scroll to Top -->
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    window.onscroll = function () {
+      document.getElementById("scrollTopBtn").style.display =
+        document.documentElement.scrollTop > 200 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+</body>
+</html>

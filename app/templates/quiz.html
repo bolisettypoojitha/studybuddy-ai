@@ -1,0 +1,11 @@
+{% for q in questions %}
+<div class="card my-3 p-3">
+  <h5><strong>Q{{ loop.index }}:</strong> {{ q.question }}</h5>
+  <ul>
+    {% for opt in q.options %}
+    <li>{{ opt }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>✅ Answer:</strong> {{ q.answer }}</p>
+</div>
+{% endfor %}

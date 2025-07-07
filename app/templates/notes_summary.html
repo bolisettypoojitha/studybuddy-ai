@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Summary | StudyBuddy{% endblock %}
+{% block content %}
+<div class="container py-4" data-aos="fade-up">
+  <h2 class="mb-3">📝 Summary for: {{ note.subject }} - {{ note.topic }}</h2>
+
+  <div class="card shadow-sm mb-4" data-aos="fade-up">
+    <div class="card-body">
+      <h5 class="card-title">Original Note</h5>
+      <p class="card-text">{{ note.content }}</p>
+    </div>
+  </div>
+
+  <div class="card bg-light border-start border-primary border-5 shadow-sm" data-aos="fade-up">
+    <div class="card-body">
+      <h5 class="card-title">✨ AI-Generated Summary</h5>
+      <p class="card-text">{{ summary }}</p>
+    </div>
+  </div>
+
+  <a href="{{ url_for('notes.notes') }}" class="btn btn-secondary mt-4">Back to Notes</a>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Topic Generator | StudyBuddy{% endblock %}
+{% block content %}
+<div class="container py-5" data-aos="fade-up">
+  <h2 class="text-center mb-4">📘 Generate Content by Topic</h2>
+
+  <form method="POST" action="{{ url_for('utilities.generate_topic') }}">
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-8 d-flex">
+        <input type="text" id="topicInput" name="topic" class="form-control form-control-lg me-2" placeholder="Enter any topic..." required>
+        <button type="button" onclick="startListening()" class="btn btn-outline-secondary"><i class="bi bi-mic-fill"></i></button>
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg px-5">Generate</button>
+    </div>
+  </form>
+
+  {% if generated_content %}
+  <div class="mt-5" data-aos="fade-up" data-aos-delay="300">
+    <h4 class="text-success mb-3">🤖 AI Generated Content</h4>
+    <div class="p-4 bg-light dark:bg-dark border rounded shadow-sm">
+      <p style="white-space: pre-wrap;">{{ generated_content }}</p>
+      <button id="mic-btn" type="button" class="btn btn-dark ms-2">
+  <i class="bi bi-mic-fill"></i>
+</button>
+
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

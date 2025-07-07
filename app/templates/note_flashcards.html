@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Flashcards from Note</h2>
+  {% for card in flashcards %}
+    <div class="card mt-3">
+      <div class="card-body">
+        <strong>Q:</strong> {{ card.question }}<br>
+        <strong>A:</strong> {{ card.answer }}
+      </div>
+    </div>
+  {% else %}
+    <p>No flashcards generated.</p>
+  {% endfor %}
+  <a href="{{ url_for('notes.notes') }}" class="btn btn-secondary mt-4">Back to Notes</a>
+</div>
+{% endblock %}

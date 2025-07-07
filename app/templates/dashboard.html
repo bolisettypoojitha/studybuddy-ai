@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | StudyBuddy{% endblock %}
+{% block content %}
+<div class="container py-5" data-aos="fade-up">
+  <h2 class="mb-4">👋 Welcome, {{ user_name }}!</h2>
+
+  <!-- Quick Stats -->
+  <div class="row g-4 mb-4">
+    <!-- Notes Card -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-start border-primary border-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-body">
+          <h5 class="card-title">🗒️ Notes</h5>
+          <p class="card-text fs-4">{{ notes_count }}</p>
+          <a href="{{ url_for('notes.notes') }}" class="btn btn-sm btn-outline-primary">View Notes</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- To-Do Card -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-start border-warning border-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-body">
+          <h5 class="card-title">✅ Pending Tasks</h5>
+          <ul class="list-group list-group-flush">
+            {% for task in pending_tasks[:3] %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ task.description }}
+              <span class="badge bg-warning text-dark">Pending</span>
+            </li>
+            {% else %}
+            <li class="list-group-item">No tasks left 🎉</li>
+            {% endfor %}
+          </ul>
+          <a href="{{ url_for('todo.todo') }}" class="btn btn-sm btn-outline-warning mt-2">View Tasks</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timer Card -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-start border-success border-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-body">
+          <h5 class="card-title">⏱️ Study Timer</h5>
+          <p class="card-text">Focus with Pomodoro sessions</p>
+          <a href="{{ url_for('tools.timer') }}" class="btn btn-sm btn-outline-success">Start Timer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="mt-4">
+    <h4>🚀 Quick Access</h4>
+    <div class="d-flex flex-wrap gap-3 mt-2">
+      <a href="{{ url_for('notes.notes') }}" class="btn btn-outline-primary">📝 Notes</a>
+      <a href="{{ url_for('notes.notes') }}" class="btn btn-outline-success">📚 Flashcards</a>
+      <a href="{{ url_for('todo.todo') }}" class="btn btn-outline-warning">📋 To-Do</a>
+      <a href="{{ url_for('tools.planner') }}" class="btn btn-outline-info">📅 Planner</a>
+      <a href="{{ url_for('tools.summarizer') }}" class="btn btn-outline-dark">🧠 Summarizer</a>
+      <a href="{{ url_for('tools.timer') }}" class="btn btn-sm btn-outline-success">⏱️Pomodoro</a>
+      <a href="{{ url_for('utilities.generate_topic') }}" class="btn btn-outline-info">💭Topic Generator</a>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

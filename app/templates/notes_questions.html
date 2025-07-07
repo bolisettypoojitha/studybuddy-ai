@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% block title %}Generated Questions{% endblock %}
+{% block content %}
+<div class="container my-4" data-aos="fade-up">
+  <h2 class="mb-4">🧠 Practice Questions from: {{ note.title }}</h2>
+  <ul class="list-group">
+    {% for q in questions %}
+    <li class="list-group-item">{{ q }}</li>
+    {% else %}
+    <li class="list-group-item text-muted">No questions generated.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

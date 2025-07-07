@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyBuddy – Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body.dark-mode {
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .dark-mode .card {
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 50%;
+    }
+
+    .feature-icon {
+      width: 140px;
+      margin: 0 auto 30px;
+    }
+
+    .feature-card i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #0d6efd;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">📘StudyBuddy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2" href="/register">Get Started</a></li>
+        </ul>
+        <button class="btn btn-sm btn-dark ms-3" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="text-center py-5 bg-light">
+    <div class="container">
+      <h1 class="display-5 fw-bold">Cognito AI-Intelligent Learning, Accelerated Success</h1>
+      <p class="lead">Unlock mastery in any subject. Powered by comprehensive notes, engaging quizzes, focused tasks, and strategic planning</p>
+      <a href="/register" class="btn btn-primary btn-lg me-2">Start Learning Now</a>
+      <a href="/login" class="btn btn-outline-secondary btn-lg">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Feature Illustration -->
+  <section class="text-center py-4">
+    <div class="container">
+      <img src="https://cdn-icons-png.flaticon.com/512/3534/3534067.png" alt="Study Icon" class="feature-icon" />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="text-center py-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-sm-6 col-md-3" data-aos="fade-up">
+          <div class="card p-3 h-100 feature-card">
+            <i class="fas fa-book"></i>
+            <h5 class="fw-bold">Smart Notes</h5>
+            <p>Create, view, and summarize your study notes.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card p-3 h-100 feature-card">
+            <i class="fas fa-clone"></i>
+            <h5 class="fw-bold">Flashcards</h5>
+            <p>Auto-generate and review flashcards easily.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card p-3 h-100 feature-card">
+            <i class="fas fa-calendar-check"></i>
+            <h5 class="fw-bold">To-Do & Planner</h5>
+            <p>Plan your week, set goals and stay productive.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card p-3 h-100 feature-card">
+            <i class="fas fa-brain"></i>
+            <h5 class="fw-bold">AI Assistance</h5>
+            <p>Use Gemini + HuggingFace for Q&A and quizzes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-1">&copy; 2025 StudyBuddy. All rights reserved.</p>
+      <small>Made with ❤️ by Team StudyBuddy</small>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    window.onscroll = function () {
+      document.getElementById("scrollTopBtn").style.display =
+        document.documentElement.scrollTop > 200 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+</body>
+
+</html>

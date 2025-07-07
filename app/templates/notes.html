@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Notes | StudyBuddy{% endblock %}
+
+{% block content %}
+<div class="container py-4" data-aos="fade-up">
+  <h2 class="mb-4">📝 Your Notes</h2>
+
+  <!-- Add Note Form -->
+  <form method="POST" action="{{ url_for('notes.add_note') }}" class="mb-4 shadow-sm p-3 rounded bg-light dark:bg-dark">
+    <div class="row g-2">
+      <div class="col-md-3">
+        <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="topic" class="form-control" placeholder="Topic" required>
+      </div>
+      <div class="col-md-6">
+        <textarea name="content" class="form-control" rows="2" placeholder="Write your note..." required></textarea>
+      </div>
+    </div>
+    <div class="mt-2 text-end">
+      <button type="submit" class="btn btn-primary">➕ Add Note</button>
+    </div>
+  </form>
+
+  <!-- Search Notes -->
+  <form method="GET" action="{{ url_for('notes.search_notes') }}" class="mb-3">
+    <input type="text" name="q" class="form-control" placeholder="🔍 Search notes by keyword...">
+  </form>
+
+  <!-- Notes List -->
+  {% for note in notes %}
+  <div class="card mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ note.subject }} - {{ note.topic }}</h5>
+      <p class="card-text">{{ note.content[:200] }}{% if note.content|length > 200 %}...{% endif %}</p>
+
+      <div class="d-flex justify-content-end flex-wrap gap-2">
+        <a href="{{ url_for('notes.summarize_note', note_id=note.id) }}" class="btn btn-outline-primary btn-sm">📝 Summarize</a>
+        <a href="{{ url_for('notes.generate_flashcards', note_id=note.id) }}" class="btn btn-outline-success btn-sm">📚 Flashcards</a>
+        <a href="{{ url_for('notes.generate_quiz', note_id=note.id) }}" class="btn btn-outline-dark btn-sm">🧠 Generate Quiz</a>
+        <a href="{{ url_for('notes.edit_note', note_id=note.id) }}" class="btn btn-outline-secondary btn-sm">✏️ Edit</a>
+        <form action="{{ url_for('notes.delete_note', note_id=note.id) }}" method="POST" style="display:inline;">
+          <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this note?')">🗑️ Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p class="text-muted">You haven't added any notes yet. Start by writing one above! 💡</p>
+  {% endfor %}
+</div>
+{% endblock %}

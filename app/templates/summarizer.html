@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Text Summarizer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🧠 AI-Powered Summarizer</h2>
+
+    <form method="POST" action="{{ url_for('tools.summarizer') }}">
+        <div class="form-group mb-3">
+            <label for="inputText">Enter text to summarize:</label>
+            <textarea name="input_text" id="inputText" rows="8" class="form-control" placeholder="Paste your notes or text here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Summarize</button>
+    </form>
+
+    {% if summary %}
+    <div class="card mt-4 shadow">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Summary</h5>
+        </div>
+        <div class="card-body">
+            <p>{{ summary }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

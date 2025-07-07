@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">📅 Weekly Study Planner</h2>
+
+  <!-- Add Task Form -->
+  <form action="{{ url_for('planner.add_planner') }}" method="POST" class="mb-4 p-4 rounded shadow bg-white" data-aos="fade-down">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" name="description" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" name="date" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Task</button>
+  </form>
+
+  <!-- Task List -->
+  {% for item in planner_items %}
+  <div class="card mb-3 shadow-sm p-3" data-aos="fade-up">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="mb-1">📌 {{ item.title }} {% if item.is_done %}<span class="badge bg-success">Done</span>{% else %}<span class="badge bg-warning">Pending</span>{% endif %}</h5>
+        <p class="mb-1">📝 {{ item.description }}</p>
+        <small>📅 {{ item.date.strftime('%d %b %Y') }}</small>
+      </div>
+      <div>
+        <form action="{{ url_for('planner.toggle_task', item_id=item.id) }}" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">✅ Toggle</button>
+        </form>
+        <form action="{{ url_for('planner.delete_task', item_id=item.id) }}" method="POST" class="d-inline ms-1">
+          <button type="submit" class="btn btn-outline-danger btn-sm">❌ Delete</button>
+        </form>
+        <!-- Optional Edit form (could be modal in real UI) -->
+        <!-- You can enhance this later with modals -->
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- Chart.js Section -->
+  <div class="card shadow mt-5 p-3">
+    <h5 class="mb-3">📊 Weekly Planner Chart</h5>
+    <canvas id="plannerChart"></canvas>
+  </div>
+</div>
+
+<!-- Chart.js Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('plannerChart').getContext('2d');
+    const plannerChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ chart_data.keys()|list|tojson }},
+        datasets: [{
+          label: 'Tasks per Day',
+          data: {{ chart_data.values()|list|tojson }},
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 }
+          }
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}
